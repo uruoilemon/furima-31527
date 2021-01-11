@@ -2,16 +2,16 @@
 
 ## usersテーブル
 
-| Column         | Type    | Options     |
-| -------------- | ------  | ----------- |
-| nickname       | string  | null: false |
-| email          | string  | null: false |
-| password       | string  | null: false |
-| last_name      | string  | null: false |
-| first_name     | string  | null: false |
-| last_name_kana | string  | null: false |
-| first_name_kana| string  | null: false |
-| birthday       | date    | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------  | ----------- |
+| nickname           | string  | null: false |
+| email              | string  | null: false |
+| encrypted_password | string  | null: false |
+| last_name          | string  | null: false |
+| first_name         | string  | null: false |
+| last_name_kana     | string  | null: false |
+| first_name_kana    | string  | null: false |
+| birthday           | date    | null: false |
 
 ### AssociationS
 - has_many :items
@@ -27,9 +27,8 @@
 | status          | string     | null: false                    |
 | price           | integer    | null: false                    |
 | payment         | string     | null: false                    |
-| from_prefecture | string     | null: false                    |
+| prefecture_id   | string     | null: false                    |
 | delivery_day    | string     | null: false                    |
-| price           | integer    | null: false                    |
 | user            | references | null: false, foreign_key: true |
 
 
@@ -41,16 +40,22 @@
 
 | Column           | Type     | Options     |
 | ---------------- | -------- | ----------- |
-| credit_number    | integer  | null: false |
-| expiration_data  | data     | null: false |
-| security_code    | integer  | null: false |
-| postal_code      | integer  | null: false |
-| prefecture       | string   | null: false |
-| Municipalities   | string   | null: false |
-| address          | integer  | null: false |
-| building         | string   | null: true  |
-| telephone_number | integer  | null: false |
 
 ### Association
 - belongs_to :item
 - belongs_to :user
+- has_one :shipping_data
+
+## shipping_data
+
+| Column           | Type     | Options     |
+| ---------------- | -------- | ----------- |
+| postal_code      | integer  | null: false |
+| prefecture_id    | string   | null: false |
+| Municipalities   | string   | null: false |
+| address          | integer  | null: false |
+| building         | string   | 　　　　　　  |
+| telephone_number | integer  | null: false |
+
+### Association
+- belongs_to :order
