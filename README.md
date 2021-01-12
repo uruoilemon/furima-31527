@@ -13,7 +13,7 @@
 | first_name_kana    | string  | null: false |
 | birthday           | date    | null: false |
 
-### AssociationS
+### Association
 - has_many :items
 - has_many :orders
 
@@ -23,12 +23,12 @@
 | --------------- | ---------- | ------------------------------ |
 | name 　　　      | string     | null: false                    |
 | text            | text       | null: false                    |
-| category        | string     | null: false                    |
-| status          | string     | null: false                    |
+| category_id     | integer    | null: false                    |
+| status_id       | integer    | null: false                    |
 | price           | integer    | null: false                    |
-| payment         | string     | null: false                    |
-| prefecture_id   | string     | null: false                    |
-| delivery_day    | string     | null: false                    |
+| payment_id      | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
+| delivery_day_id | integer    | null: false                    |
 | user            | references | null: false, foreign_key: true |
 
 
@@ -38,8 +38,10 @@
 
 ## ordersテーブル
 
-| Column           | Type     | Options     |
-| ---------------- | -------- | ----------- |
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| user     | references | null: false, foreign_key: true |
+| item     | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :item
@@ -48,14 +50,15 @@
 
 ## shipping_data
 
-| Column           | Type     | Options     |
-| ---------------- | -------- | ----------- |
-| postal_code      | integer  | null: false |
-| prefecture_id    | string   | null: false |
-| Municipalities   | string   | null: false |
-| address          | integer  | null: false |
-| building         | string   | 　　　　　　  |
-| telephone_number | integer  | null: false |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| postal_code      | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| municipalities   | string     | null: false                    |
+| address          | string     | null: false                    |
+| building         | string     |                                |
+| telephone_number | string     | null: false                    |
+| order            | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :order
