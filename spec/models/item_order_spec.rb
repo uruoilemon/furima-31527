@@ -6,7 +6,7 @@ RSpec.describe ItemOrder, type: :model do
       @item_order = FactoryBot.build(:item_order)
     end
     context '購入情報が保存出来るとき' do
-      it 'すべての値が正しく入力されていれば保存できる' do
+      it 'すべての値が正しく入力され、かつtokenがあれば保存できる' do
         expect(@item_order).to be_valid
       end
       it 'buildingは空でも保存できる' do
@@ -50,6 +50,11 @@ RSpec.describe ItemOrder, type: :model do
       @item_order.phone_number = 123456789
       @item_order.valid?
       expect(@item_order.errors.full_messages).to include "Phone number ten or elven digits"
+    end
+    it 'tokenが空では保存できない' do
+      @item_order.token = nil
+      @item_order.valid?
+      expect(@item_order.errors.full_messages).to include "Token can't be blank"
     end
    end
   end
