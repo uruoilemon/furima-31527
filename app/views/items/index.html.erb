@@ -129,9 +129,15 @@
       <% @items.each do |item| %>
       <li class='list'>
         <div class='item-img-content'> 
-        <%= link_to item_path(item.id) do %>
-         <%= image_tag item.image, class: "item-img" %>
-           <div class='item-info'>
+         <%= link_to item_path(item.id) do %>
+          <%= image_tag item.image, class: "item-img" %>
+           <%if Order.exists?(item_id: item.id) %>
+            <div class='sold-out'>
+             <span>Sold Out!!</span>
+            </div>
+          </div>
+            <%end%>
+          <div class='item-info'>
             <h3 class='item-name'>
               <%= item.name %>
             </h3>
@@ -139,7 +145,6 @@
              <%= "#{item.price}円" %>
             </div>
               <%= "#{item.payment.name}" %>
-           </div>
          </div>
          <% end %>
         </li>
@@ -149,11 +154,9 @@
          <div class='item-img-content'>
           <%= link_to "#" do %>
           <%= image_tag "item-sample.png", class: "item-img" %>
-          <%# 商品が売れていればsold outを表示しましょう %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <%# //商品が売れていればsold outを表示しましょう %>
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
