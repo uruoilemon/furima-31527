@@ -1,13 +1,15 @@
 class ItemOrder
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture, :city, :address, :building, :phone_number, :item_id, :user_id, :token, :price
+  attr_accessor :postal_code, :prefecture, :city, :address, :building, :phone_number, :item_id, :user_id, :token
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :city
     validates :address
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'ten or elven digits' }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is only numbers. And ten or elven digits' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   validates :prefecture, numericality: { other_than: 1, message: 'Select' }
