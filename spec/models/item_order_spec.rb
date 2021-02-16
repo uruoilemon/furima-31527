@@ -33,6 +33,11 @@ RSpec.describe ItemOrder, type: :model do
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include 'Prefecture Select'
       end
+      it 'prefectureの選択が「---」の状態では登録できない' do
+        @item_order.prefecture = 1
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include 'Prefecture Select'
+      end
       it 'cityが空では保存できない' do
         @item_order.city = nil
         @item_order.valid?
@@ -55,6 +60,16 @@ RSpec.describe ItemOrder, type: :model do
       end
       it 'phone_numberが英数混合では登録できない' do
         @item_order.phone_number = "0901234567a"
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include 'Phone number is only numbers. And ten or elven digits'
+      end
+      it 'phone_numberにハイフンが含まれていると登録できない' do
+        @item_order.phone_number = "090-123-456"
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include 'Phone number is only numbers. And ten or elven digits'
+      end
+      it 'phone_numberが12桁以上だと登録できない' do
+        @item_order.phone_number = "090123456789"
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include 'Phone number is only numbers. And ten or elven digits'
       end
