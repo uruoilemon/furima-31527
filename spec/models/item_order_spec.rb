@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe ItemOrder, type: :model do
   describe '購入情報の保存' do
     before do
-      @item_order = FactoryBot.build(:item_order)
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
+      @item_order = FactoryBot.build(:item_order, user_id: @user.id, item_id: @item.id)
     end
     context '購入情報が保存出来るとき' do
       it 'すべての値が正しく入力され、かつtokenがあれば保存できる' do
