@@ -1,0 +1,15 @@
+<% if user_signed_in?  %>
+  <% if Favorite.find_by(user_id: current_user.id, item_id: @item.id) %>
+  <% unless @item.user.id == current_user.id %>
+   <p><span>お気に入り登録: </span><%= link_to '解除する', item_favorite_path(@item, @item.favorites),method: "delete", remote: true %></p>
+   <% end %>
+   <p><span>お気に入り数: </span><%= @item.favorites.count %></p>
+  <% else %>
+   <% unless @item.user.id == current_user.id %>
+   <p><span>お気に入り登録: </span><%= link_to '登録する', item_favorites_path(@item),method: "post", remote: true %></p>
+   <% end %>
+    <p><span>お気に入り数: </span><%= @item.favorites.count %></p>
+  <% end %>
+<% else %>
+ <p><span>お気に入り数: </span><%= @item.favorites.count %></p>
+<% end %>
