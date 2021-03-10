@@ -6,7 +6,7 @@ Rails.application.routes.draw do
    resources :favorites, only:[:create,:destroy]
    resources :orders, only:[:index,:create]
   end
-  
+  get 'favorite/:id', to: 'favorites#checked'
   # post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
   # delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
 end

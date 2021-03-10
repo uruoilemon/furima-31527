@@ -127,6 +127,8 @@
     <ul class='item-lists'>
     <% if @items[0] != nil %>
       <% @items.each do |item| %>
+            <%= item.inspect%>
+      <%= item.favorites.inspect%>
       <li class='list'>
         <div class='item-img-content'> 
          <%= link_to item_path(item.id) do %>

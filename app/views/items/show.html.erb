@@ -69,9 +69,9 @@
     </table>
     <div class="option">
       <div class="favorite-btn">
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-          <div> 
-          <%= render "favorites/favorite", item: @item %>
+        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20" %>
+          <div id="favorite-<%= @item.id %>"> 
+          <%= render partial: "favorites/favorite" %>
           </div>
       </div>
       <div class="report-btn">

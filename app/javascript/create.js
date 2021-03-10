@@ -1,1 +1,0 @@
-$("#favorite_<%= @item.id %>").html("<%= j(render 'favorites/favorite') %>");
